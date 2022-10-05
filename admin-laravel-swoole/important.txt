@@ -1,0 +1,10 @@
+JWT
+AuthController (кладет токен в cookie)
+App\Http\Middleware\Authenticate (extends handle для автоматический авторизации по токену)
+
+JSON
+App\Routing\Router (extends toResponse для лучшего отображения JSON)
+подмена класса в app\bootstrap
+
+php artisan passport:install
+
