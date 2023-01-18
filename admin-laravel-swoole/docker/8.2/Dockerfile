@@ -14,7 +14,7 @@ ENV TZ=UTC
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
 
 RUN apt-get update \
-    && apt-get install -y gnupg gosu curl ca-certificates zip unzip git supervisor sqlite3 libcap2-bin libpng-dev python2 \
+    && apt-get install -y gnupg gosu curl ca-certificates zip unzip git cron supervisor sqlite3 libcap2-bin libpng-dev python2 \
     && mkdir -p ~/.gnupg \
     && chmod 600 ~/.gnupg \
     && echo "disable-ipv6" >> ~/.gnupg/dirmngr.conf \
@@ -30,8 +30,8 @@ RUN apt-get update \
        php8.2-xml php8.2-zip php8.2-bcmath php8.2-soap \
        php8.2-intl php8.2-readline \
        php8.2-ldap \
-    #    php8.2-msgpack php8.2-igbinary php8.2-redis php8.2-swoole \
-    #    php8.2-memcached php8.2-pcov php8.2-xdebug \
+       php8.2-msgpack php8.2-igbinary php8.2-redis php8.2-swoole \
+       php8.2-memcached php8.2-pcov php8.2-xdebug \
     && php -r "readfile('https://getcomposer.org/installer');" | php -- --install-dir=/usr/bin/ --filename=composer \
     && curl -sLS https://deb.nodesource.com/setup_$NODE_VERSION.x | bash - \
     && apt-get install -y nodejs \
@@ -52,6 +52,10 @@ RUN setcap "cap_net_bind_service=+ep" /usr/bin/php8.2
 
 RUN groupadd --force -g $WWWGROUP sail
 RUN useradd -ms /bin/bash --no-user-group -g $WWWGROUP -u 1337 sail
+
+COPY scheduler /etc/cron.d/scheduler
+RUN chmod 0644 /etc/cron.d/scheduler \
+    && crontab /etc/cron.d/scheduler
 
 COPY start-container /usr/local/bin/start-container
 COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
