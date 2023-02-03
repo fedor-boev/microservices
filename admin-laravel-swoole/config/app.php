@@ -185,6 +185,8 @@ return [
         /*
          * Package Service Providers...
          */
+        Laravel\Octane\OctaneServiceProvider::class,
+
 
         /*
          * Application Service Providers...
