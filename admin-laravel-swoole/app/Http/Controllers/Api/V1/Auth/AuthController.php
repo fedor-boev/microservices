@@ -1,9 +1,14 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api\V1\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterRequest;
+use App\Http\Requests\UpdateInfoRequest;
+use App\Http\Requests\UpdatePasswordRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -22,7 +27,7 @@ class AuthController extends Controller
      *   )
      * )
      */
-    public function login(Request $request)
+    public function login(Request $request): \Illuminate\Http\JsonResponse
     {
         if (Auth::attempt($request->only('email', 'password'))) {
             $user = Auth::user();
@@ -53,18 +58,104 @@ class AuthController extends Controller
      *   )
      * )
      */
-    public function register(RegisterRequest $request)
+    public function register(RegisterRequest $request): \Illuminate\Http\JsonResponse
     {
         $user = User::create(
             $request->only('first_name', 'last_name', 'email')
             + [
                 'password' => Hash::make($request->input('password')),
+                // TODO: Enum
                 'role_id' => 1,
+                'is_influencer' => 1
             ]
         );
 
-        return response($user, Response::HTTP_CREATED);
+        return response()->json($user, Response::HTTP_CREATED);
     }
 
     // TODO: add logout
+
+    /**
+     * @OA\Get(path="/user",
+     *   security={{"bearerAuth":{}}},
+     *   tags={"Profile"},
+     *   @OA\Response(response="200",
+     *     description="Authenticated User",
+     *   )
+     * )
+     * @throws \Throwable
+     */
+    public function user(): UserResource
+    {
+        $user = Auth::user();
+
+        throw_if(!$user, 'RuntimeException', 'User not found');
+
+        $resource = new UserResource($user);
+
+        /** @var User $user */
+        if ($user->isInfluencer()) {
+            return $resource;
+        }
+
+        return $resource->additional([
+            'data' => [
+                'permissions' => $user->permissions(),
+            ],
+        ]);
+    }
+
+    /**
+     * @OA\Put(
+     *   path="/users/info",
+     *   security={{"bearerAuth":{}}},
+     *   tags={"Profile"},
+     *   @OA\Response(response="202",
+     *     description="User Info Update",
+     *   ),
+     *   @OA\RequestBody(
+     *     required=true,
+     *     @OA\JsonContent(ref="#/components/schemas/UpdateInfoRequest")
+     *   )
+     * )
+     * @throws \Throwable
+     */
+    public function updateInfo(UpdateInfoRequest $request): \Illuminate\Http\JsonResponse
+    {
+        $user = Auth::user();
+
+        throw_if(!$user, 'RuntimeException', 'User not found');
+
+        $user->update($request->only('first_name', 'last_name', 'email'));
+
+        return response()->json(new UserResource($user), Response::HTTP_ACCEPTED);
+    }
+
+    /**
+     * @OA\Put(
+     *   path="/users/password",
+     *   security={{"bearerAuth":{}}},
+     *   tags={"Profile"},
+     *   @OA\Response(response="202",
+     *     description="User Password Update",
+     *   ),
+     *   @OA\RequestBody(
+     *     required=true,
+     *     @OA\JsonContent(ref="#/components/schemas/UpdatePasswordRequest")
+     *   )
+     * )
+     * @throws \Throwable
+     */
+    public function updatePassword(UpdatePasswordRequest $request): \Illuminate\Http\Response|\Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\Routing\ResponseFactory
+    {
+        $user = Auth::user();
+
+        throw_if(!$user, 'RuntimeException', 'User not found');
+
+        $user->update([
+            'password' => Hash::make($request->input('password')),
+        ]);
+
+        return response(new UserResource($user), Response::HTTP_ACCEPTED);
+    }
 }
