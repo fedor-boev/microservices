@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Controllers\Api\V1\Admin;
 
 use App\Http\Requests\UpdateInfoRequest;
@@ -161,79 +163,5 @@ class UserController extends AdminController
         User::destroy($id);
 
         return response(null, Response::HTTP_NO_CONTENT);
-    }
-
-    /**
-     * @OA\Get(path="/user",
-     *   security={{"bearerAuth":{}}},
-     *   tags={"Profile"},
-     *   @OA\Response(response="200",
-     *     description="Authenticated User",
-     *   )
-     * )
-     */
-    public function user(): UserResource
-    {
-        $user = Auth::user();
-
-        // TODO: user is null
-
-        return (new UserResource($user))->additional([
-            'data' => [
-                'permissions' => $user->permissions(),
-            ],
-        ]);
-    }
-
-    /**
-     * @OA\Put(
-     *   path="/users/info",
-     *   security={{"bearerAuth":{}}},
-     *   tags={"Profile"},
-     *   @OA\Response(response="202",
-     *     description="User Info Update",
-     *   ),
-     *   @OA\RequestBody(
-     *     required=true,
-     *     @OA\JsonContent(ref="#/components/schemas/UpdateInfoRequest")
-     *   )
-     * )
-     */
-    public function updateInfo(UpdateInfoRequest $request)
-    {
-        $user = Auth::user();
-
-        // TODO: user is null
-
-        $user->update($request->only('first_name', 'last_name', 'email'));
-
-        return response(new UserResource($user), Response::HTTP_ACCEPTED);
-    }
-
-    /**
-     * @OA\Put(
-     *   path="/users/password",
-     *   security={{"bearerAuth":{}}},
-     *   tags={"Profile"},
-     *   @OA\Response(response="202",
-     *     description="User Password Update",
-     *   ),
-     *   @OA\RequestBody(
-     *     required=true,
-     *     @OA\JsonContent(ref="#/components/schemas/UpdatePasswordRequest")
-     *   )
-     * )
-     */
-    public function updatePassword(UpdatePasswordRequest $request)
-    {
-        $user = Auth::user();
-
-        // TODO: user is null
-
-        $user->update([
-            'password' => Hash::make($request->input('password')),
-        ]);
-
-        return response(new UserResource($user), Response::HTTP_ACCEPTED);
     }
 }

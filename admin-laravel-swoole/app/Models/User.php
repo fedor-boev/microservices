@@ -42,6 +42,10 @@ use Laravel\Passport\HasApiTokens;
  * @mixin \Eloquent
  * @property int $is_influencer
  * @method static \Illuminate\Database\Eloquent\Builder|User whereIsInfluencer($value)
+ * @property \Illuminate\Support\Carbon|null $email_verified_at
+ * @property string|null $remember_token
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereEmailVerifiedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|User whereRememberToken($value)
  */
 class User extends Authenticatable
 {
