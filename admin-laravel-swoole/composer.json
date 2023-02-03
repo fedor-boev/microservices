@@ -11,6 +11,7 @@
         "irazasyed/telegram-bot-sdk": "^3.9",
         "itsgoingd/clockwork": "^5.1",
         "laravel/framework": "^9.19",
+        "laravel/octane": "^1.4",
         "laravel/passport": "^11.2",
         "laravel/sanctum": "^3.0",
         "laravel/socialite": "^5.5",

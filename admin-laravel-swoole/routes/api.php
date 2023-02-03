@@ -19,39 +19,9 @@ use App\Http\Controllers\Api\V1\Admin\ProductController;
 use App\Http\Controllers\Api\V1\Admin\RoleController;
 use App\Http\Controllers\Api\V1\Admin\UserController;
 use App\Http\Controllers\Api\V1\Auth\AuthController;
-use App\Models\User;
 
 Route::get('/', static function () {
-
-//    \DB::enableQueryLog();
-
-    $user = User::query()->select(['id'])->first();
-
-    for ($i = 1; $i <= 1; $i++) {
-        \App\Jobs\UserInfo::dispatch($user)
-            // берется из config queue connections
-            ->onConnection('redis')
-            // берется из queue
-//        ->onQueue('user')
-        ;
-    }
-
-
-//    \App\Jobs\UserInfo::dispatch($user)
-//        ->onConnection('redis')
-//        ->onQueue('user_2');
-//    dispatch(new \App\Jobs\UserInfo($user));
-
-//    dd(\DB::getQueryLog());
-
-//    Log::critical("This is an critical level message.");
-//    Log::emergency("This is an emergency level message.");
-
     return 'API is working!';
-});
-
-Route::get('test', static function(\Illuminate\Http\Request $request) {
-    return Blade::render('{{ $greeting }}, @if (true) World @else Folks @endif', ['greeting' => 'Hello']);
 });
 
 Route::controller(AuthController::class)->group(function () {
@@ -59,9 +29,8 @@ Route::controller(AuthController::class)->group(function () {
     Route::post('register', 'register')->name('register');
 });
 
-// Admin
 Route::group([
-    'middleware' => ['auth:api'], // Unauthenticated if header Accept application/json
+    'middleware' => ['auth:api'],
     'prefix' => 'admin',
 ], static function () {
     Route::controller(UserController::class)->group(function () {
@@ -70,10 +39,9 @@ Route::group([
         Route::put('users/password', 'updatePassword');
     });
 
-    Route::post('upload', [ImageController::class, 'upload']);
     Route::get('export', [OrderController::class, 'export']);
-
     Route::get('chart', [DashboardController::class, 'chart']);
+    Route::post('upload', [ImageController::class, 'upload']);
 
     Route::apiResource('users', UserController::class);
     Route::apiResource('roles', RoleController::class);
