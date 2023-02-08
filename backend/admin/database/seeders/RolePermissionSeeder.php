@@ -20,7 +20,7 @@ class RolePermissionSeeder extends Seeder
     {
         $permissions = Permission::all();
 
-        $admin = Role::whereName('Admin')->first();
+        $admin = Role::whereName('Admin')->firstOrFail();
 
         foreach ($permissions as $permission) {
             DB::table('role_permission')->insert([
@@ -29,10 +29,10 @@ class RolePermissionSeeder extends Seeder
             ]);
         }
 
-        $editor = Role::whereName('Editor')->first();
+        $editor = Role::whereName('Editor')->firstOrFail();
 
         foreach ($permissions as $permission) {
-            if (!in_array($permission->name, ['edit_roles'])) {
+            if ($permission->name !== 'edit_roles') {
                 DB::table('role_permission')->insert([
                     'role_id' => $editor->id,
                     'permission_id' => $permission->id,
@@ -40,7 +40,7 @@ class RolePermissionSeeder extends Seeder
             }
         }
 
-        $viewer = Role::whereName('Viewer')->first();
+        $viewer = Role::whereName('Viewer')->firstOrFail();
 
         $viewerRoles = [
             'view_users',
@@ -50,7 +50,7 @@ class RolePermissionSeeder extends Seeder
         ];
 
         foreach ($permissions as $permission) {
-            if (in_array($permission->name, $viewerRoles)) {
+            if (in_array($permission->name, $viewerRoles, true)) {
                 DB::table('role_permission')->insert([
                     'role_id' => $viewer->id,
                     'permission_id' => $permission->id,
