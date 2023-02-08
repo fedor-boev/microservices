@@ -74,9 +74,9 @@ Route::group([
 });
 
 // Influencer
-Route::group([
-    'middleware' => ['auth:api'],
-    'prefix' => 'influencer',
-], static function () {
-    Route::get('products', [\App\Http\Controllers\Api\V1\Influencer\ProductController::class, 'index']);
-});
+//Route::group([
+//    'middleware' => ['auth:api'],
+//    'prefix' => 'influencer',
+//], static function () {
+//    Route::get('products', [\App\Http\Controllers\Api\V1\Influencer\ProductController::class, 'index']);
+//});
