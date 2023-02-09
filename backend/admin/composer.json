@@ -6,7 +6,6 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
-        "beyondcode/laravel-websockets": "^1.13",
         "guzzlehttp/guzzle": "^7.2",
         "irazasyed/telegram-bot-sdk": "^3.9",
         "laravel/framework": "^9.19",
