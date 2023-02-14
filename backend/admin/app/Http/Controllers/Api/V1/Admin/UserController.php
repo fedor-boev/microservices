@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Http\Controllers\Api\V1\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Http\Requests\UpdateInfoRequest;
 use App\Http\Requests\UpdatePasswordRequest;
 use App\Http\Requests\UserCreateRequest;
@@ -14,12 +15,11 @@ use App\Models\RoleUser;
 use App\Policies\Abilities;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
 
-class UserController extends AdminController
+class UserController extends Controller
 {
     /**
      * @OA\Get(path="/admin/users",
