@@ -9,7 +9,7 @@ use App\Models\Role;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class RolePermissionSeeder extends Seeder
+class PermissionRoleSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -23,7 +23,7 @@ class RolePermissionSeeder extends Seeder
         $admin = Role::whereName('Admin')->firstOrFail();
 
         foreach ($permissions as $permission) {
-            DB::table('role_permission')->insert([
+            DB::table('permission_role')->insert([
                 'role_id' => $admin->id,
                 'permission_id' => $permission->id,
             ]);
@@ -33,7 +33,7 @@ class RolePermissionSeeder extends Seeder
 
         foreach ($permissions as $permission) {
             if ($permission->name !== 'edit_roles') {
-                DB::table('role_permission')->insert([
+                DB::table('permission_role')->insert([
                     'role_id' => $editor->id,
                     'permission_id' => $permission->id,
                 ]);
@@ -51,7 +51,7 @@ class RolePermissionSeeder extends Seeder
 
         foreach ($permissions as $permission) {
             if (in_array($permission->name, $viewerRoles, true)) {
-                DB::table('role_permission')->insert([
+                DB::table('permission_role')->insert([
                     'role_id' => $viewer->id,
                     'permission_id' => $permission->id,
                 ]);
@@ -59,10 +59,10 @@ class RolePermissionSeeder extends Seeder
         }
 
 
-//        $items = \DB::table('role_permission')->get();
+//        $items = \DB::table('permission_role')->get();
 //
 //        foreach ($items as $item) {
-//            \DB::table('role_permission')->insert([
+//            \DB::table('permission_role')->insert([
 //                'id' => $item->id,
 //                'role_id' => $item->role_id,
 //                'permission_id' => $item->permission_id,
