@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Providers;
 
 use App\Mail\JobFailedMailable;
@@ -9,7 +11,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Queue;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
-use Telegram\Bot\Laravel\Facades\Telegram;
+//use Telegram\Bot\Laravel\Facades\Telegram;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -37,10 +39,10 @@ class AppServiceProvider extends ServiceProvider
 
             Mail::to('user@mail.local')->send(new JobFailedMailable($event));
 
-            Telegram::sendMessage([
-                'chat_id' => env('TELEGRAM_CHANNEL_ID'),
-                'text' => 'Failed job '. $event->exception->getMessage(). $event->job->getRawBody()
-            ]);
+//            Telegram::sendMessage([
+//                'chat_id' => env('TELEGRAM_CHANNEL_ID'),
+//                'text' => 'Failed job '. $event->exception->getMessage(). $event->job->getRawBody()
+//            ]);
         });
 
         Log::shareContext([

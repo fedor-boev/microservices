@@ -3,6 +3,7 @@
 use Monolog\Handler\NullHandler;
 use Monolog\Handler\StreamHandler;
 use Monolog\Handler\SyslogUdpHandler;
+use Monolog\Level;
 
 return [
 
@@ -58,8 +59,9 @@ return [
                 'info',
                 'warning',
                 'critical',
-                'critical_telegram',
-                'emergency'
+                // TODO: подождать обновление пакета
+//                'critical_telegram',
+//                'emergency'
             ],
             'ignore_exceptions' => false,
         ],
@@ -137,7 +139,7 @@ return [
             'handler' => Monolog\Handler\FilterHandler::class,
             'with' => [
                 'handler' => new Monolog\Handler\RotatingFileHandler(storage_path('logs/debug.log'), 3),
-                'minLevelOrList' => [Monolog\Logger::DEBUG],
+                'minLevelOrList' => [Level::Debug],
             ],
         ],
 
@@ -146,7 +148,7 @@ return [
             'handler' => Monolog\Handler\FilterHandler::class,
             'with' => [
                 'handler' => new Monolog\Handler\RotatingFileHandler(storage_path('logs/info.log'), 3),
-                'minLevelOrList' => [Monolog\Logger::INFO],
+                'minLevelOrList' => [Level::Info],
             ],
         ],
 
@@ -155,7 +157,7 @@ return [
             'handler' => Monolog\Handler\FilterHandler::class,
             'with' => [
                 'handler' => new Monolog\Handler\RotatingFileHandler(storage_path('logs/warning.log'), 3),
-                'minLevelOrList' => [Monolog\Logger::NOTICE, Monolog\Logger::WARNING],
+                'minLevelOrList' => [Level::Notice, Level::Warning],
             ],
         ],
 
@@ -164,26 +166,26 @@ return [
             'handler' => Monolog\Handler\FilterHandler::class,
             'with' => [
                 'handler' => new Monolog\Handler\RotatingFileHandler(storage_path('logs/critical.log'), 3),
-                'minLevelOrList' => [Monolog\Logger::ERROR, Monolog\Logger::CRITICAL],
+                'minLevelOrList' => [Level::Error, Level::Critical],
             ],
         ],
 
-        'critical_telegram' => [
-            'driver'  => 'monolog',
-            'handler' => Monolog\Handler\FilterHandler::class,
-            'with' => [
-                'handler' => new Monolog\Handler\TelegramBotHandler($apiKey = env('TELEGRAM_BOT_TOKEN'), $channel = env('TELEGRAM_CHANNEL_ID')),
-                'minLevelOrList' => [Monolog\Logger::ERROR, Monolog\Logger::CRITICAL],
-            ],
-        ],
+//        'critical_telegram' => [
+//            'driver'  => 'monolog',
+//            'handler' => Monolog\Handler\FilterHandler::class,
+//            'with' => [
+//                'handler' => new Monolog\Handler\TelegramBotHandler($apiKey = env('TELEGRAM_BOT_TOKEN'), $channel = env('TELEGRAM_CHANNEL_ID')),
+//                'minLevelOrList' => [Monolog\Logger::ERROR, Monolog\Logger::CRITICAL],
+//            ],
+//        ],
 
-        'emergency' => [
-            'driver'  => 'monolog',
-            'handler' => Monolog\Handler\FilterHandler::class,
-            'with' => [
-                'handler' => new Monolog\Handler\TelegramBotHandler($apiKey = env('TELEGRAM_BOT_TOKEN'), $channel = env('TELEGRAM_CHANNEL_ID')),
-                'minLevelOrList' => [Monolog\Logger::ALERT, Monolog\Logger::EMERGENCY],
-            ],
-        ],
+//        'emergency' => [
+//            'driver'  => 'monolog',
+//            'handler' => Monolog\Handler\FilterHandler::class,
+//            'with' => [
+//                'handler' => new Monolog\Handler\TelegramBotHandler($apiKey = env('TELEGRAM_BOT_TOKEN'), $channel = env('TELEGRAM_CHANNEL_ID')),
+//                'minLevelOrList' => [Monolog\Logger::ALERT, Monolog\Logger::EMERGENCY],
+//            ],
+//        ],
     ],
 ];
