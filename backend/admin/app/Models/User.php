@@ -74,11 +74,11 @@ class User extends Authenticatable
     ];
 
     /**
-     * @return HasOneThrough
+     * @return BelongsTo
      */
-    public function role(): \Illuminate\Database\Eloquent\Relations\HasOneThrough
+    public function role(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->hasOneThrough(Role::class, RoleUser::class, 'user_id', 'id', 'id', 'role_id');
+        return $this->belongsTo(Role::class);
     }
 
     /**

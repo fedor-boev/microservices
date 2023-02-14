@@ -98,8 +98,6 @@ class AuthController extends Controller
             return $resource;
         }
 
-        dd($user);
-
         return $resource->additional([
             'data' => [
                 'permissions' => $user->permissions(),

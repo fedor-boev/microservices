@@ -51,7 +51,7 @@ class RoleController extends Controller
 
         if ($permissions = $request->input('permissions')) {
             foreach ($permissions as $permission_id) {
-                \DB::table('role_permission')->insert([
+                \DB::table('permission_role')->insert([
                     'role_id' => $role->id,
                     'permission_id' => $permission_id,
                 ]);
@@ -115,13 +115,13 @@ class RoleController extends Controller
 
         $role->update($request->only('name'));
 
-        DB::table('role_permission')
+        DB::table('permission_role')
             ->where('role_id', $role->id)
             ->delete();
 
         if ($permissions = $request->input('permissions')) {
             foreach ($permissions as $permission_id) {
-                \DB::table('role_permission')->insert([
+                \DB::table('permission_role')->insert([
                     'role_id' => $role->id,
                     'permission_id' => $permission_id,
                 ]);
