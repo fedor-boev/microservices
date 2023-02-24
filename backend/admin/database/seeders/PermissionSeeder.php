@@ -4,36 +4,26 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
+use App\Models\LinkProduct;
 use App\Models\Permission;
+use App\Models\Role;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class PermissionSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
-    public function run()
+    public function run(): void
     {
-        Permission::insert([
-            ['name' => 'view_users'],
-            ['name' => 'edit_users'],
-            ['name' => 'view_roles'],
-            ['name' => 'edit_roles'],
-            ['name' => 'view_products'],
-            ['name' => 'edit_products'],
-            ['name' => 'view_orders'],
-            ['name' => 'edit_orders'],
-        ]);
+        $items = DB::connection('old_mysql')->table('permissions')->get();
 
-//        $items = \DB::table('permissions')->get();
-//
-//        foreach ($items as $item) {
-//            Permission::create([
-//                'id' => $item->id,
-//                'name' => $item->name,
-//            ]);
-//        }
+        foreach ($items as $item) {
+            Permission::create([
+                'id' => $item->id,
+                'name' => $item->name,
+            ]);
+        }
     }
 }
