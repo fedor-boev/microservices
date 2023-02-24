@@ -10,24 +10,29 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
     public function up(): void
     {
-        Schema::create('orders', static function (Blueprint $table) {
-            $table->id();
+        Schema::create('orders', function (Blueprint $table) {
+            $table->unsignedBigInteger('id')->primary();
+            $table->string('code');
+            $table->string('transaction_id')->nullable();
             $table->string('first_name');
             $table->string('last_name');
             $table->string('email');
+            $table->unsignedBigInteger('user_id');
+            $table->string('influencer_email');
+            $table->string('address')->nullable();
+            $table->string('address2')->nullable();
+            $table->string('city')->nullable();
+            $table->string('country')->nullable();
+            $table->string('zip')->nullable();
             $table->timestamps();
         });
     }
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
     public function down(): void
     {

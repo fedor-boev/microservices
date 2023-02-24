@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Models\User;
+// use Illuminate\Support\Facades\Gate;
+use App\Models\Role;
+use App\Models\UserRole;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -24,16 +26,22 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->registerPolicies(); // by default
+        $this->registerPolicies();
 
-        // Gates
+        Gate::define('view', function ($user, $model) {
+            $userRole = UserRole::where('user_id', $user->id)->first();
+            $role = Role::find($userRole->role_id);
+            $permissions = $role->permissions->pluck('name');
 
-        Gate::define('view', static function (User $user, $model) {
-            return $user->hasAccess("view_{$model}") || $user->hasAccess("edit_{$model}");
+            return $permissions->contains("view_{$model}") || $permissions->contains("edit_{$model}");
         });
 
-        Gate::define('edit', static function (User $user, $model) {
-            return $user->hasAccess("edit_{$model}");
+        Gate::define('edit', function ($user, $model) {
+            $userRole = UserRole::where('user_id', $user->id)->first();
+            $role = Role::find($userRole->role_id);
+            $permissions = $role->permissions->pluck('name');
+
+            return $permissions->contains("edit_{$model}");
         });
     }
 }

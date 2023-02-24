@@ -1,50 +1,17 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-/**
- * @OA\Schema(
- *      title="Update User Info request",
- *      description="Update User Info request body data",
- * )
- */
 class UpdateInfoRequest extends FormRequest
 {
     /**
-     * @OA\Property(
-     *   title="first_name"
-     * )
-     *
-     * @var string
-     */
-    public string $first_name;
-
-    /**
-     * @OA\Property(
-     *   title="last_name"
-     * )
-     *
-     * @var string
-     */
-    public $last_name;
-
-    /**
-     * @OA\Property(
-     *   title="email"
-     * )
-     *
-     * @var string
-     */
-    public $email;
-
-    /**
      * Determine if the user is authorized to make this request.
-     *
-     * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -52,9 +19,9 @@ class UpdateInfoRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             'email' => 'email',

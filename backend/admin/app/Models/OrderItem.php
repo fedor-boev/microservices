@@ -1,9 +1,11 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 /**
  * App\Models\OrderItem
@@ -13,10 +15,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $product_title
  * @property string $price
  * @property int $quantity
+ * @property string $revenue
  * @property \Illuminate\Support\Carbon|null $created_at
  * @property \Illuminate\Support\Carbon|null $updated_at
  * @property-read \App\Models\Order $order
- * @method static \Database\Factories\OrderItemFactory factory(...$parameters)
  * @method static \Illuminate\Database\Eloquent\Builder|OrderItem newModelQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|OrderItem newQuery()
  * @method static \Illuminate\Database\Eloquent\Builder|OrderItem query()
@@ -26,17 +28,19 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|OrderItem wherePrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder|OrderItem whereProductTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|OrderItem whereQuantity($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|OrderItem whereRevenue($value)
  * @method static \Illuminate\Database\Eloquent\Builder|OrderItem whereUpdatedAt($value)
  * @mixin \Eloquent
  */
 class OrderItem extends Model
 {
-    use HasFactory;
+    protected $guarded = [];
 
-    public function order()
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function order(): BelongsTo
     {
-        return $this->belongsTo(
-            Order::class
-        );
+        return $this->belongsTo(Order::class);
     }
 }
