@@ -1,40 +1,15 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-/**
- * @OA\Schema(
- *      title="Update User Password request",
- *      description="Update User Password request body data",
- * )
- */
 class UpdatePasswordRequest extends FormRequest
 {
     /**
-     * @OA\Property(
-     *   title="password"
-     * )
-     *
-     * @var string
-     */
-    public string $password;
-
-    /**
-     * @OA\Property(
-     *   title="password_confirm"
-     * )
-     *
-     * @var string
-     */
-    public string $password_confirm;
-
-
-    /**
      * Determine if the user is authorized to make this request.
-     *
-     * @return bool
      */
     public function authorize(): bool
     {
@@ -44,7 +19,7 @@ class UpdatePasswordRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array
+     * @return array<string, \Illuminate\Contracts\Validation\Rule|array|string>
      */
     public function rules(): array
     {

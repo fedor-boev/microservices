@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Http\Resources;
 
+use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class ChartResource extends JsonResource
@@ -9,11 +12,9 @@ class ChartResource extends JsonResource
     /**
      * Transform the resource into an array.
      *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return array
+     * @return array<string, mixed>
      */
-    public function toArray($request)
+    public function toArray(\Illuminate\Http\Request $request): array
     {
         return [
             'date' => $this->date,

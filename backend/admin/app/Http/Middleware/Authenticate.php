@@ -2,7 +2,6 @@
 
 namespace App\Http\Middleware;
 
-use Closure;
 use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use Illuminate\Http\Request;
 
@@ -13,28 +12,28 @@ class Authenticate extends Middleware
      */
     protected function redirectTo(Request $request): ?string
     {
-        // TODO: закомментировать если не работает
         return $request->expectsJson() ? null : route('login');
     }
 
-    /**
-     * Handle an incoming request.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @param  string[]  ...$guards
-     * @return mixed
-     *
-     * @throws \Illuminate\Auth\AuthenticationException
-     */
-    public function handle($request, Closure $next, ...$guards): mixed
-    {
-        if ($jwt = $request->cookie('jwt')) {
-            $request->headers->set('Authorization', 'Bearer '. $jwt);
-        }
-
-        $this->authenticate($request, $guards);
-
-        return $next($request);
-    }
+    /** @note down code for JWT tokens */
+//    /**
+//     * Handle an incoming request.
+//     *
+//     * @param  \Illuminate\Http\Request  $request
+//     * @param  \Closure  $next
+//     * @param  string[]  ...$guards
+//     * @return mixed
+//     *
+//     * @throws \Illuminate\Auth\AuthenticationException
+//     */
+//    public function handle($request, Closure $next, ...$guards): mixed
+//    {
+//        if ($jwt = $request->cookie('jwt')) {
+//            $request->headers->set('Authorization', 'Bearer '. $jwt);
+//        }
+//
+//        $this->authenticate($request, $guards);
+//
+//        return $next($request);
+//    }
 }
