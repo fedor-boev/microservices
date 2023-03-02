@@ -15,19 +15,30 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-        $users = DB::connection('old_mysql')->table('users')->get();
+        User::factory(20)->create();
 
-        foreach ($users as $user){
-            User::create([
-                'id' => $user->id,
-                'first_name' => $user->first_name,
-                'last_name' => $user->last_name,
-                'email' => $user->email,
-                'password' => $user->password,
-                'created_at' => $user->created_at,
-                'updated_at' => $user->updated_at,
-                'is_influencer' => $user->is_influencer,
-            ]);
-        }
+        User::factory()->create([
+            'first_name' => 'Admin',
+            'last_name' => 'Admin',
+            'email' => 'admin@admin.com'
+        ]);
+
+        User::factory()->create([
+            'first_name' => 'Editor',
+            'last_name' => 'Editor',
+            'email' => 'editor@editor.com'
+        ]);
+
+        User::factory()->create([
+            'first_name' => 'Viewer',
+            'last_name' => 'Viewer',
+            'email' => 'viewer@viewer.com'
+        ]);
+
+        User::factory()->create([
+            'first_name' => 'Influencer',
+            'last_name' => 'Influencer',
+            'email' => 'i@i.com'
+        ]);
     }
 }

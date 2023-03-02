@@ -24,6 +24,7 @@ composer-update-local:
 # Start Project
 up:
 	cd ./backend/users/ && ./vendor/bin/sail up -d
+up-s:
 	cd ./backend/checkout/ && ./vendor/bin/sail up -d
 	cd ./backend/influencer/ && ./vendor/bin/sail up -d
 	cd ./backend/admin/ && ./vendor/bin/sail up -d
@@ -37,7 +38,7 @@ down:
 	cd ./backend/admin/ && ./vendor/bin/sail down
 	cd ./backend/emails/ && ./vendor/bin/sail down
 
-build:
+build-up:
 	cd ./backend/users/ && ./vendor/bin/sail build
 	cd ./backend/checkout/ && ./vendor/bin/sail build
 	cd ./backend/influencer/ && ./vendor/bin/sail build
@@ -48,3 +49,7 @@ fire:
 	cd ./backend/checkout/ && ./vendor/bin/sail artisan fire
 update-rankings:
 	cd ./backend/influencer/ && ./vendor/bin/sail artisan update:rankings
+
+
+au-route-list:
+	cd ./backend/users/ && ./vendor/bin/sail artisan route:list

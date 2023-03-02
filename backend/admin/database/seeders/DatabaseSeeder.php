@@ -18,8 +18,10 @@ class DatabaseSeeder extends Seeder
             ProductSeeder::class,
             OrderSeeder::class,
             OrderItemSeeder::class,
+
             RoleSeeder::class,
             PermissionSeeder::class,
+
             RolePermissionSeeder::class,
             UserRoleSeeder::class
         ]);
