@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\Pivot;
 
 /**
  * App\Models\UserRole
@@ -20,8 +22,10 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|UserRole whereUserId($value)
  * @mixin \Eloquent
  */
-class UserRole extends Model
+class UserRole extends Pivot
 {
+    use HasFactory;
+
     protected $guarded = [];
 
     public $timestamps = false;
