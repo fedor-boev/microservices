@@ -17,13 +17,18 @@ class PermissionSeeder extends Seeder
      */
     public function run(): void
     {
-        $items = DB::connection('old_mysql')->table('permissions')->get();
+        Permission::insert([
+            ['name' => 'view_users'],
+            ['name' => 'edit_users'],
 
-        foreach ($items as $item) {
-            Permission::create([
-                'id' => $item->id,
-                'name' => $item->name,
-            ]);
-        }
+            ['name' => 'view_roles'],
+            ['name' => 'edit_roles'],
+
+            ['name' => 'view_products'],
+            ['name' => 'edit_products'],
+
+            ['name' => 'view_orders'],
+            ['name' => 'edit_orders'],
+        ]);
     }
 }
