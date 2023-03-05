@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('products', static function (Blueprint $table) {
             $table->unsignedBigInteger('id')->primary();
-            $table->string('title');
+            $table->string('title', 150);
             $table->text('description')->nullable();
-            $table->string('image');
+            $table->string('image', 255);
             $table->decimal('price');
             $table->timestamps();
         });
