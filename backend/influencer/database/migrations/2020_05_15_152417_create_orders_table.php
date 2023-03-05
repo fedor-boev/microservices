@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('orders', static function (Blueprint $table) {
             $table->unsignedBigInteger('id')->primary();
-            $table->string('code');
+            $table->string('code', 40);
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });

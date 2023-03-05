@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('links', static function (Blueprint $table) {
             $table->unsignedBigInteger('id')->primary();
-            $table->string('code')->unique();
+            $table->string('code',40)->unique();
             $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
