@@ -2,14 +2,13 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\Auth;
 
-use App\Http\Requests\RegisterRequest;
-use App\Http\Requests\UpdateInfoRequest;
-use App\Http\Requests\UpdatePasswordRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\RegisterRequest;
+use App\Http\Requests\Auth\UpdateInfoRequest;
+use App\Http\Requests\Auth\UpdatePasswordRequest;
 use App\Models\User;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,7 +19,7 @@ class AuthController extends Controller
 {
 
     /**
-     * Get auth user token
+     * Get influencer token
      *
      * @param Request $request
      * @return JsonResponse
@@ -30,7 +29,9 @@ class AuthController extends Controller
     {
         if (Auth::attempt($request->only('email', 'password'))) {
             $user = Auth::user();
+
             throw_if(!$user, 'RuntimeException', 'User not found');
+
             $scope = $request->input('scope');
 
             if ($scope !== 'influencer' && $user->isInfluencer()) {
@@ -53,7 +54,7 @@ class AuthController extends Controller
 
 
     /**
-     * Register new user
+     * Register new user, where user is influencer
      *
      * @param RegisterRequest $request
      * @return JsonResponse
@@ -71,29 +72,43 @@ class AuthController extends Controller
         return response()->json($user, Response::HTTP_CREATED);
     }
 
-    public function user()
+    /**
+     * Show AUTH user
+     *
+     * @return \Illuminate\Contracts\Auth\Authenticatable
+     * @throws \Throwable
+     */
+    public function user(): \Illuminate\Contracts\Auth\Authenticatable
     {
-        return \Auth::user();
+        $user = Auth::user();
+
+        throw_if(!$user, 'RuntimeException', 'User not found');
+
+        return $user;
     }
 
     /**
      * Update auth user
      *
      * @param UpdateInfoRequest $request
-     * @return Application|ResponseFactory|\Illuminate\Http\Response
+     * @return JsonResponse
+     * @throws \Throwable
      */
-    public function updateInfo(UpdateInfoRequest $request)
+    public function updateInfo(UpdateInfoRequest $request): JsonResponse
     {
-        $user = \Auth::user();
+        /** @var User $user */
+        $user = Auth::user();
+
+        throw_if(!$user, 'RuntimeException', 'User not found');
 
         $user->update($request->only('first_name', 'last_name', 'email'));
 
-        return response($user, Response::HTTP_ACCEPTED);
+        return response()->json($user, Response::HTTP_ACCEPTED);
     }
 
 
     /**
-     * Update auth user password
+     * Update AUTH user password
      *
      * @param UpdatePasswordRequest $request
      * @return JsonResponse
@@ -101,6 +116,7 @@ class AuthController extends Controller
      */
     public function updatePassword(UpdatePasswordRequest $request): JsonResponse
     {
+        /** @var User $user */
         $user = Auth::user();
 
         throw_if(!$user, 'RuntimeException', 'User not found');
@@ -113,6 +129,8 @@ class AuthController extends Controller
     }
 
     /**
+     * Check AUTH user is authenticated
+     *
      * @return int
      */
     public function authenticated(): int

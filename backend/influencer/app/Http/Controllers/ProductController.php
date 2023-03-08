@@ -8,6 +8,7 @@ use App\Http\Resources\ProductResource;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 
 class ProductController extends Controller
@@ -16,9 +17,9 @@ class ProductController extends Controller
      * @param Request $request
      * @return AnonymousResourceCollection
      */
-    public function index(Request $request)
+    public function index(Request $request): AnonymousResourceCollection
     {
-        $products = \Cache::remember('products', 60 * 30, function () use ($request) {
+        $products = Cache::remember('products', 60 * 30, static function () use ($request) {
             return Product::all();
         });
 

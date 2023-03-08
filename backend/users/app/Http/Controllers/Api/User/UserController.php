@@ -2,44 +2,57 @@
 
 declare(strict_types=1);
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api\User;
 
+use App\Http\Controllers\Controller;
 use App\Http\Resources\PaginatedResource;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
+use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpFoundation\Response;
 
 class UserController extends Controller
 {
-    // TODO
+    /**
+     * INDEX Users
+     *
+     * @param Request $request
+     * @return Collection|AnonymousResourceCollection
+     */
     public function index(Request $request): Collection|AnonymousResourceCollection
     {
-        if (-1 === (int)$request->input('page')) {
+        if ((int)$request->input('page') === -1) {
             return User::all();
         }
 
         return PaginatedResource::collection(User::paginate());
     }
 
-    // TODO
-    public function show($id)
+    /**
+     * TODO: resource
+     * SHOW user
+     *
+     * @param int $id
+     * @return array
+     */
+    public function show(int $id): array
     {
-        return User::find($id);
+        return User::find($id)?->toArray ?? [];
     }
 
     /**
-     * Store new user
+     * Store user
      *
      * @param Request $request
      * @return JsonResponse
      */
-    public function store(Request $request)
+    public function store(Request $request): JsonResponse
     {
         $data = $request->only('first_name', 'last_name', 'email')
-            + ['password' => \Hash::make($request->input('password'))];
+            + ['password' => Hash::make($request->input('password'))];
 
         $user = User::create($data);
 
@@ -47,15 +60,18 @@ class UserController extends Controller
     }
 
     /**
-     * Update user by user_id
+     * Update user
      *
      * @param Request $request
      * @param $id
      * @return JsonResponse
+     * @throws \Throwable
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id): JsonResponse
     {
         $user = User::find($id);
+
+        throw_if(!$user, 'RuntimeException', 'User not found');
 
         $user->update($request->only('first_name', 'last_name', 'email'));
 
@@ -65,13 +81,11 @@ class UserController extends Controller
     /**
      * Remove user by user_id
      *
-     * @param $id
-     * @return JsonResponse
+     * @param int $id
+     * @return bool
      */
-    public function destroy($id): JsonResponse
+    public function destroy(int $id): bool
     {
-        User::destroy($id);
-
-        return response()->json(null, Response::HTTP_NO_CONTENT);
+        return (bool) User::destroy($id);
     }
 }
