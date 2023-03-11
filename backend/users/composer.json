@@ -11,7 +11,8 @@
         "laravel/framework": "^10.0",
         "laravel/octane": "^1.4",
         "laravel/passport": "^11.8",
-        "laravel/tinker": "^2.8"
+        "laravel/tinker": "^2.8",
+        "spiral/roadrunner": "^2.12"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.13",
