@@ -11,6 +11,7 @@
         "laravel/framework": "^10.0",
         "laravel/octane": "^1.4",
         "laravel/tinker": "^2.8",
+        "spiral/roadrunner": "^2.12",
         "vladimir-yuldashev/laravel-queue-rabbitmq": "^13.2"
     },
     "require-dev": {

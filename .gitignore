@@ -2,3 +2,9 @@
 /.vscode/
 /TODO
 !/backend/common/
+/frontend/admin/
+/frontend/checkout/
+/frontend/common/
+/frontend/emails/
+/frontend/influencer/
+/frontend/users/

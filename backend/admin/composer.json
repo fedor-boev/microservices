@@ -6,16 +6,17 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "fedorvladimirov/common": "*",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.0",
         "laravel/octane": "^1.4",
         "laravel/tinker": "^2.8",
+        "spiral/roadrunner": "^2.12",
         "vladimir-yuldashev/laravel-queue-rabbitmq": "^13.2"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.13",
         "fakerphp/faker": "^1.9.1",
-        "fedorvladimirov/common": "^1.0",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.21",
         "mockery/mockery": "^1.4.4",
