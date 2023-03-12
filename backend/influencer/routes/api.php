@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\Product\ProductController;
 use App\Http\Controllers\LinkController;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\StatsController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,4 +28,8 @@ Route::group([
     Route::post('links', [LinkController::class, 'store']);
     Route::get('stats', [StatsController::class, 'index']);
     Route::get('rankings', [StatsController::class, 'rankings']);
+});
+
+Route::fallback(static function () {
+    return redirect('api');
 });
