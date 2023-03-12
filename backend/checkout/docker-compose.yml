@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.9'
 services:
     checkout:
         build:
@@ -20,7 +20,8 @@ services:
         volumes:
             - '.:/var/www/html'
         networks:
-            - 'sail'
+            - db
+            - microservices
         depends_on:
             - checkout_db
 
@@ -37,7 +38,7 @@ services:
             - 'sail-pgsql:/var/lib/postgresql/data'
             - './vendor/laravel/sail/database/pgsql/create-testing-database.sql:/docker-entrypoint-initdb.d/10-create-testing-database.sql'
         networks:
-            - sail
+            - db
         healthcheck:
             test:
                 - CMD
@@ -51,8 +52,10 @@ services:
             timeout: 5s
 
 networks:
-    sail:
+    db:
         driver: bridge
+    microservices:
+        external: true
 volumes:
     sail-pgsql:
         driver: local

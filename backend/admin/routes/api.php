@@ -1,13 +1,13 @@
 <?php
 
-use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\ImageController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\PermissionController;
-use App\Http\Controllers\ProductController;
-use App\Http\Controllers\RoleController;
-use App\Http\Controllers\UserController;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\Dashboard\DashboardController;
+use App\Http\Controllers\Api\Image\ImageController;
+use App\Http\Controllers\Api\Order\OrderController;
+use App\Http\Controllers\Api\Permission\PermissionController;
+use App\Http\Controllers\Api\Product\ProductController;
+use App\Http\Controllers\Api\Role\RoleController;
+use App\Http\Controllers\Api\User\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,4 +38,8 @@ Route::group([
     Route::apiResource('products', ProductController::class);
     Route::apiResource('orders', OrderController::class)->only('index', 'show');
     Route::apiResource('permissions', PermissionController::class)->only('index');
+});
+
+Route::fallback(static function () {
+    return redirect('api');
 });
