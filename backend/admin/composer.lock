@@ -516,16 +516,16 @@
         },
         {
             "name": "fedorvladimirov/common",
-            "version": "v1.0.3",
+            "version": "v1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fedorvladimirov/common.git",
-                "reference": "5b84ecf0244ebc4f370a9bd01010b8b137b99397"
+                "reference": "3c3f583f95f4367e131c24c20b95bd625ccce892"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fedorvladimirov/common/zipball/5b84ecf0244ebc4f370a9bd01010b8b137b99397",
-                "reference": "5b84ecf0244ebc4f370a9bd01010b8b137b99397",
+                "url": "https://api.github.com/repos/fedorvladimirov/common/zipball/3c3f583f95f4367e131c24c20b95bd625ccce892",
+                "reference": "3c3f583f95f4367e131c24c20b95bd625ccce892",
                 "shasum": ""
             },
             "require": {
@@ -545,9 +545,9 @@
             "description": "Common libraries for Microservices",
             "support": {
                 "issues": "https://github.com/fedorvladimirov/common/issues",
-                "source": "https://github.com/fedorvladimirov/common/tree/v1.0.3"
+                "source": "https://github.com/fedorvladimirov/common/tree/v1.1.0"
             },
-            "time": "2023-03-11T22:19:13+00:00"
+            "time": "2023-03-12T11:19:34+00:00"
         },
         {
             "name": "fruitcake/php-cors",
@@ -3653,7 +3653,6 @@
                 {
                     "name": "Pavel Butchnev (butschster)",
                     "email": "pavel.buchnev@spiralscout.com"
-
                 },
                 {
                     "name": "Aleksei Gagarin (roxblnfk)",
@@ -5730,93 +5729,6 @@
             ],
             "description": "Executes commands in sub-processes",
             "homepage": "https://symfony.com",
-            "support": {
-                "source": "https://github.com/symfony/process/tree/v6.2.7"
-            },
-            "funding": [
-                {
-                    "url": "https://symfony.com/sponsor",
-                    "type": "custom"
-                },
-                {
-                    "url": "https://github.com/fabpot",
-                    "type": "github"
-                },
-                {
-                    "url": "https://tidelift.com/funding/github/packagist/symfony/symfony",
-                    "type": "tidelift"
-                }
-            ],
-            "time": "2023-02-24T10:42:00+00:00"
-        },
-        {
-            "name": "symfony/process",
-            "version": "v6.2.7",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/process.git",
-                "reference": "680e8a2ea6b3f87aecc07a6a65a203ae573d1902"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/680e8a2ea6b3f87aecc07a6a65a203ae573d1902",
-                "reference": "680e8a2ea6b3f87aecc07a6a65a203ae573d1902",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.1",
-                "psr/http-message": "^1.0",
-                "symfony/http-foundation": "^4.4 || ^5.0 || ^6.0"
-            },
-            "require-dev": {
-                "nyholm/psr7": "^1.1",
-                "psr/log": "^1.1 || ^2 || ^3",
-                "symfony/browser-kit": "^4.4 || ^5.0 || ^6.0",
-                "symfony/config": "^4.4 || ^5.0 || ^6.0",
-                "symfony/event-dispatcher": "^4.4 || ^5.0 || ^6.0",
-                "symfony/framework-bundle": "^4.4 || ^5.0 || ^6.0",
-                "symfony/http-kernel": "^4.4 || ^5.0 || ^6.0",
-                "symfony/phpunit-bridge": "^5.4@dev || ^6.0"
-            },
-            "suggest": {
-                "nyholm/psr7": "For a super lightweight PSR-7/17 implementation"
-            },
-            "type": "symfony-bridge",
-            "extra": {
-                "branch-alias": {
-                    "dev-main": "2.1-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Bridge\\PsrHttpMessage\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "http://symfony.com/contributors"
-                }
-            ],
-            "description": "PSR HTTP message bridge",
-            "homepage": "http://symfony.com",
-            "keywords": [
-                "http",
-                "http-message",
-                "psr-17",
-                "psr-7"
-            ],
             "support": {
                 "source": "https://github.com/symfony/process/tree/v6.2.7"
             },

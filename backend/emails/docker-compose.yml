@@ -20,13 +20,13 @@ services:
         volumes:
             - '.:/var/www/html'
         networks:
-            - db
+            - emails
             - microservices
         depends_on:
             - emails_db
 
     emails_db:
-        image: 'postgres:14'
+        image: 'postgres:15'
         ports:
             - '${FORWARD_DB_PORT:-54327}:5432'
         environment:
@@ -35,10 +35,10 @@ services:
             POSTGRES_USER: '${DB_USERNAME}'
             POSTGRES_PASSWORD: '${DB_PASSWORD:-secret}'
         volumes:
-            - 'sail-pgsql:/var/lib/postgresql/data'
+            - 'emails-pgsql:/var/lib/postgresql/data'
             - './vendor/laravel/sail/database/pgsql/create-testing-database.sql:/docker-entrypoint-initdb.d/10-create-testing-database.sql'
         networks:
-            - db
+            - emails
         healthcheck:
             test:
                 - CMD
@@ -52,10 +52,10 @@ services:
             timeout: 5s
 
 networks:
-    db:
+    emails:
         driver: bridge
     microservices:
         external: true
 volumes:
-    sail-pgsql:
+    emails-pgsql:
         driver: local

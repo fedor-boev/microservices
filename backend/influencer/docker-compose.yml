@@ -20,13 +20,13 @@ services:
         volumes:
             - '.:/var/www/html'
         networks:
-            - db
+            - influencer
             - microservices
         depends_on:
             - influencer_db
 
     influencer_db:
-        image: 'postgres:14'
+        image: 'postgres:15'
         ports:
             - '${FORWARD_DB_PORT:-54330}:5432'
         environment:
@@ -35,10 +35,10 @@ services:
             POSTGRES_USER: '${DB_USERNAME}'
             POSTGRES_PASSWORD: '${DB_PASSWORD:-secret}'
         volumes:
-            - 'sail-pgsql:/var/lib/postgresql/data'
+            - 'influencer-pgsql:/var/lib/postgresql/data'
             - './vendor/laravel/sail/database/pgsql/create-testing-database.sql:/docker-entrypoint-initdb.d/10-create-testing-database.sql'
         networks:
-            - db
+            - influencer
         healthcheck:
             test:
                 - CMD
@@ -54,13 +54,13 @@ services:
     redis:
         image: redis:latest
         ports:
-            - 6379:6379
+            - '${FORWARD_REDIS_PORT:-63791}:6379'
 
 networks:
-    db:
+    influencer:
         driver: bridge
     microservices:
         external: true
 volumes:
-    sail-pgsql:
+    influencer-pgsql:
         driver: local

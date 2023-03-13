@@ -20,13 +20,13 @@ services:
         volumes:
             - '.:/var/www/html'
         networks:
-            - db
+            - users
             - microservices
         depends_on:
             - users_db
 
     users_db:
-        image: 'postgres:14'
+        image: 'postgres:15'
         ports:
             - '${FORWARD_DB_PORT:-54328}:5432'
         environment:
@@ -35,10 +35,10 @@ services:
             POSTGRES_USER: '${DB_USERNAME}'
             POSTGRES_PASSWORD: '${DB_PASSWORD:-secret}'
         volumes:
-            - 'sail-pgsql:/var/lib/postgresql/data'
+            - 'users-pgsql:/var/lib/postgresql/data'
             - './vendor/laravel/sail/database/pgsql/create-testing-database.sql:/docker-entrypoint-initdb.d/10-create-testing-database.sql'
         networks:
-            - db
+            - users
         healthcheck:
             test:
                 - CMD
@@ -52,12 +52,10 @@ services:
             timeout: 5s
 
 networks:
-    db:
+    users:
         driver: bridge
     microservices:
         external: true
 volumes:
-    sail-pgsql:
-        driver: local
-    sail-redis:
+    users-pgsql:
         driver: local
