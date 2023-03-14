@@ -14,12 +14,17 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('link_products', static function (Blueprint $table) {
-            $table->unsignedBigInteger('id')->primary();
-            $table->unsignedBigInteger('link_id');
-            $table->unsignedBigInteger('product_id');
+            $table->id();
 
-            $table->foreign('link_id')->references('id')->on('links');
-            $table->foreign('product_id')->references('id')->on('products');
+            $table->foreignId('link_id')
+                ->constrained()
+                ->references('id')
+                ->on('links');
+
+            $table->foreignId('product_id')
+                ->constrained()
+                ->references('id')
+                ->on('products');
         });
     }
 

@@ -14,8 +14,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('order_items', static function (Blueprint $table) {
-            $table->unsignedBigInteger('id')->primary();
-            $table->unsignedBigInteger('order_id');
+            $table->id();
+            $table->foreignId('order_id')->constrained();
             $table->string('product_title', 150);
             $table->decimal('price');
             $table->unsignedInteger('quantity');

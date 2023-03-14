@@ -15,12 +15,12 @@ return new class extends Migration
     {
         Schema::create('orders', static function (Blueprint $table) {
             $table->id();
-            $table->string('code', 40);
+            $table->string('code');
             $table->string('transaction_id', 255)->nullable();
             $table->string('first_name', 100);
             $table->string('last_name', 100);
             $table->string('email', 255);
-            $table->unsignedBigInteger('user_id');
+            $table->foreignId('user_id');
             $table->string('influencer_email', 255);
             $table->string('address', 150)->nullable();
             $table->string('address2', 150)->nullable();
