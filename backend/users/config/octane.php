@@ -189,7 +189,8 @@ return [
         'resources/**/*.php',
         'routes',
         'composer.lock',
-        '.env'
+        '.env',
+        'vendor/fedorvladimirov'
     ],
 
     /*
