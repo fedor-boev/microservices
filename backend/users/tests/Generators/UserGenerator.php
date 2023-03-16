@@ -3,7 +3,7 @@
 namespace Tests\Generators;
 
 use App\Enums\UserRole;
-use App\Models\User;
+use App\Models\User\User;
 
 class UserGenerator
 {

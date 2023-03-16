@@ -15,11 +15,15 @@ return new class extends Migration
     {
         Schema::create('role_permission', static function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('role_id');
-            $table->unsignedBigInteger('permission_id');
+            $table->foreignId('role_id')
+                ->constrained()
+                ->references('id')
+                ->on('roles');
 
-            $table->foreign('role_id')->references('id')->on('roles');
-            $table->foreign('permission_id')->references('id')->on('permissions');
+            $table->foreignId('permission_id')
+                ->constrained()
+                ->references('id')
+                ->on('permissions');
         });
     }
 

@@ -1,90 +1,83 @@
 <?php
+///** @noinspection PhpMultipleClassDeclarationsInspection */
 
 declare(strict_types=1);
 
 namespace App\Http\Controllers\Api\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Http\Requests\Auth\UpdateInfoRequest;
 use App\Http\Requests\Auth\UpdatePasswordRequest;
-use App\Models\User;
+use App\Http\Resources\User\UserResource;
+use App\Models\User\User;
+use App\Services\Auth\AuthService;
+use App\Services\User\UserService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Spatie\LaravelData\Exceptions\InvalidDataClass;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends Controller
 {
 
+    // TODO: настроить интерфейсы
+    public function __construct(
+        private AuthService $authService,
+        private UserService $userService
+    )
+    {
+
+    }
+
     /**
      * Get influencer token
      *
-     * @param Request $request
+     * @param LoginRequest $request
      * @return JsonResponse
+     * @throws InvalidDataClass
      * @throws \Throwable
      */
-    public function login(Request $request): JsonResponse
+    public function login(LoginRequest $request): JsonResponse
     {
-        if (Auth::attempt($request->only('email', 'password'))) {
-            $user = Auth::user();
-
-            throw_if(!$user, 'RuntimeException', 'User not found');
-
-            $scope = $request->input('scope');
-
-            if ($scope !== 'influencer' && $user->isInfluencer()) {
-                return response()->json([
-                    'error' => 'Access denied!',
-                ], Response::HTTP_FORBIDDEN);
-            }
-
-            $token = $user->createToken($scope, [$scope])->accessToken;
-
-            return response()->json([
-                'token' => $token,
-            ]);
-        }
-
-        return response()->json([
-            'error' => 'Invalid Credentials!',
-        ], Response::HTTP_UNAUTHORIZED);
+        return $this->authService->createToken($request->getData());
     }
 
+    /**
+     * @return JsonResponse
+     */
+    public function logout(): JsonResponse
+    {
+        return $this->authService->revokeToken();
+    }
 
     /**
      * Register new user, where user is influencer
      *
      * @param RegisterRequest $request
      * @return JsonResponse
+     * @throws InvalidDataClass
      */
     public function register(RegisterRequest $request): JsonResponse
     {
-        $user = User::create(
-            $request->only('first_name', 'last_name', 'email')
-            + [
-                'password' => Hash::make($request->input('password')),
-                'is_influencer' => 1,
-            ]
-        );
-
-        return response()->json($user, Response::HTTP_CREATED);
+        return $this->authService->createRegister($request->getData());
     }
 
     /**
      * Show AUTH user
      *
-     * @return \Illuminate\Contracts\Auth\Authenticatable
      * @throws \Throwable
      */
-    public function user(): \Illuminate\Contracts\Auth\Authenticatable
+    public function user(): JsonResponse
     {
         $user = Auth::user();
 
         throw_if(!$user, 'RuntimeException', 'User not found');
 
-        return $user;
+        return (new UserResource($user))
+            ->response();
     }
 
     /**
@@ -103,7 +96,9 @@ class AuthController extends Controller
 
         $user->update($request->only('first_name', 'last_name', 'email'));
 
-        return response()->json($user, Response::HTTP_ACCEPTED);
+        return (new UserResource($user))
+            ->response()
+            ->setStatusCode(Response::HTTP_ACCEPTED);
     }
 
 
@@ -125,7 +120,9 @@ class AuthController extends Controller
             'password' => Hash::make($request->input('password')),
         ]);
 
-        return response()->json($user, Response::HTTP_ACCEPTED);
+        return (new UserResource($user))
+            ->response()
+            ->setStatusCode(Response::HTTP_ACCEPTED);
     }
 
     /**

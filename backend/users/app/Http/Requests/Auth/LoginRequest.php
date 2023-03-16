@@ -4,10 +4,14 @@ declare(strict_types=1);
 
 namespace App\Http\Requests\Auth;
 
+use App\Data\Requests\Auth\LoginData;
 use Illuminate\Foundation\Http\FormRequest;
+use Spatie\LaravelData\WithData;
 
 class LoginRequest extends FormRequest
 {
+    use WithData;
+
     /**
      * Determine if the user is authorized to make this request.
      */
@@ -24,8 +28,12 @@ class LoginRequest extends FormRequest
         return [
             'email' => 'required|email|string|max:320',
             'password' => 'required|string|max:255',
-            'password_confirm' => 'required|same:password|string|max:255',
             'scope' => 'sometimes|string|in:influencer,admin',
         ];
+    }
+
+    protected function dataClass(): string
+    {
+        return LoginData::class;
     }
 }
