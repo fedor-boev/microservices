@@ -16,9 +16,10 @@ return new class extends Migration
             $table->string('first_name', 100);
             $table->string('last_name', 100);
             $table->string('email', 320)->unique();
-            $table->string('password', 255);
+            $table->string('password');
             $table->tinyInteger('is_influencer')->default(0);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
