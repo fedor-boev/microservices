@@ -4,14 +4,11 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Jobs\LinkCreated;
-use App\Jobs\ProductCreated;
-use App\Jobs\ProductDeleted;
-use App\Jobs\ProductUpdated;
-use Illuminate\Auth\Events\Registered;
-use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
+use App\Jobs\Link\LinkCreated;
+use App\Jobs\Product\ProductCreated;
+use App\Jobs\Product\ProductDeleted;
+use App\Jobs\Product\ProductUpdated;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Event;
 
 class EventServiceProvider extends ServiceProvider
 {

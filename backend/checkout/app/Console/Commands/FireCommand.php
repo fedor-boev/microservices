@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Console\Commands;
 
-use App\Jobs\OrderCompleted;
-use App\Models\Order;
+use App\Jobs\Order\OrderCompleted;
+use App\Models\Order\Order;
 use Illuminate\Console\Command;
 
 class FireCommand extends Command
