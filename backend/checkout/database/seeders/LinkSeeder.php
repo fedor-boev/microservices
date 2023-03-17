@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\Models\Link;
+use App\Models\Link\Link;
 use App\Models\LinkProduct;
-use App\Models\Product;
+use App\Models\Product\Product;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class LinkSeeder extends Seeder
 {

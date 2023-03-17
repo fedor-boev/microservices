@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Database\Seeders;
 
-use App\Models\Order;
-use App\Models\OrderItem;
+use App\Models\Order\Order;
+use App\Models\Order\OrderItem;
 use Illuminate\Database\Seeder;
 
 class OrderSeeder extends Seeder

@@ -190,7 +190,6 @@ return [
         'routes',
         'composer.lock',
         '.env',
-        'vendor/fedorvladimirov'
     ],
 
     /*
@@ -218,4 +217,5 @@ return [
     */
 
     'max_execution_time' => 30,
+
 ];

@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\Order\OrderController;
-use App\Http\Controllers\LinkController;
 use Illuminate\Support\Facades\Route;
+use Link\LinkController;
 
 /*
 |--------------------------------------------------------------------------

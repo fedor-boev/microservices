@@ -2,9 +2,9 @@
 
 use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Product\ProductController;
-use App\Http\Controllers\LinkController;
-use App\Http\Controllers\StatsController;
 use Illuminate\Support\Facades\Route;
+use Link\LinkController;
+use Stats\StatsController;
 
 /*
 |--------------------------------------------------------------------------

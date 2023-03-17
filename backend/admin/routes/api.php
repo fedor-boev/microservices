@@ -36,6 +36,7 @@ Route::group([
     Route::apiResource('users', UserController::class);
     Route::apiResource('roles', RoleController::class);
     Route::apiResource('products', ProductController::class);
+    // TODO orders without saving?
     Route::apiResource('orders', OrderController::class)->only('index', 'show');
     Route::apiResource('permissions', PermissionController::class)->only('index');
 });

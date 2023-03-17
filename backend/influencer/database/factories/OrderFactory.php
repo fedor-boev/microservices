@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Link;
+use App\Models\Link\Link;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class OrderFactory extends Factory

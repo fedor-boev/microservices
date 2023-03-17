@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Models\Order;
+use App\Models\Order\Order;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Redis;
 use Microservices\UserService;
@@ -15,7 +15,7 @@ class UpdateRankingsCommand extends Command
     {
         $userService = new UserService();
 
-        $users = collect($userService->all(-1));
+        $users = collect($userService->paginate(-1));
 
         $users = $users->filter(function ($user) {
             return $user->is_influencer;

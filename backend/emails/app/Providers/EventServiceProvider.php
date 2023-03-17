@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
-use App\Jobs\AdminAdded;
+use App\Jobs\Admin\AdminAdded;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
 
 class EventServiceProvider extends ServiceProvider
@@ -25,7 +25,7 @@ class EventServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        \App::bindMethod(AdminAdded::class . '@handle', fn($job) => $job->handle());
+        \App::bindMethod(AdminAdded::class . '@handle', static fn($job) => $job->handle());
     }
 
 //    /**
