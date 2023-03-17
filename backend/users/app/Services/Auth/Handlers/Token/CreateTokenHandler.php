@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Services\Auth\Handlers;
+namespace App\Services\Auth\Handlers\Token;
 
 use App\Models\User\User;
 
-class CreateToken
+class CreateTokenHandler
 {
 
     /**

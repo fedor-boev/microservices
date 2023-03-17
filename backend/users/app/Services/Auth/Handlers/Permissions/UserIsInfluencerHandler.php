@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Services\Auth\Handlers;
+namespace App\Services\Auth\Handlers\Permissions;
 
 use App\Models\User\User;
 
-class UserIsInfluencer
+class UserIsInfluencerHandler
 {
     /**
      * Check if user is influencer
