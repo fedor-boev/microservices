@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Services\Auth\Handlers\Password;
+namespace App\Services\Auth\UseCases\Password;
 
 use Illuminate\Support\Facades\Hash;
 
-class HashPasswordHandler
+class HashPassword
 {
     /**
      * Create password hash

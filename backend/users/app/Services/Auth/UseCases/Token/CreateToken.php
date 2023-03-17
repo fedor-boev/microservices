@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Auth\Handlers;
+namespace App\Services\Auth\UseCases\Token;
 
 use App\Models\User\User;
 

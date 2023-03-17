@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Providers;
 
+use App\Contracts\Repositories\Auth\iAuthRepository;
 use App\Contracts\Services\Auth\iAuthService;
+use App\Repositories\User\AuthRepository;
 use App\Services\Auth\AuthService;
 use Illuminate\Support\ServiceProvider;
 
@@ -32,5 +34,6 @@ class AppServiceProvider extends ServiceProvider
     private function bindClasses(): void
     {
         $this->app->bind(iAuthService::class, AuthService::class);
+        $this->app->bind(iAuthRepository::class, AuthRepository::class);
     }
 }

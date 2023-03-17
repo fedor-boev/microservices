@@ -2,6 +2,7 @@
 
 namespace App\Services\Auth;
 
+use App\Contracts\Repositories\Auth\iAuthRepository;
 use App\Contracts\Services\Auth\iAuthService;
 use App\Data\Requests\Auth\LoginData;
 use App\Data\Requests\Auth\PasswordData;
@@ -11,11 +12,10 @@ use App\Http\Resources\Auth\TokenResource;
 use App\Http\Resources\ErrorResource;
 use App\Http\Resources\User\UserResource;
 use App\Models\User\User;
-use App\Repositories\User\UserRepository;
-use App\Services\Auth\Handlers\Password\HashPasswordHandler;
-use App\Services\Auth\Handlers\Permissions\UserIsInfluencerHandler;
-use App\Services\Auth\Handlers\Token\CreateTokenHandler;
-use App\Services\Auth\Handlers\Token\RevokeTokenHandler;
+use App\Services\Auth\UseCases\Password\HashPassword;
+use App\Services\Auth\UseCases\Permissions\UserIsInfluencer;
+use App\Services\Auth\UseCases\Token\CreateToken;
+use App\Services\Auth\UseCases\Token\RevokeToken;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
@@ -26,12 +26,12 @@ use Symfony\Component\HttpFoundation\Response;
 class AuthService implements iAuthService
 {
     public function __construct(
-        private readonly UserIsInfluencerHandler $userIsInfluencerHandler,
-        private readonly CreateTokenHandler      $createTokenHandler,
-        private readonly RevokeTokenHandler      $revokeTokenHandler,
-        private readonly HashPasswordHandler     $hashPasswordHandler,
+        private readonly UserIsInfluencer $userIsInfluencer,
+        private readonly CreateToken      $createToken,
+        private readonly RevokeToken      $revokeToken,
+        private readonly HashPassword     $hashPassword,
         //
-        private readonly UserRepository          $userRepository
+        private readonly iAuthRepository $userRepository
     )
     {
 
@@ -49,7 +49,7 @@ class AuthService implements iAuthService
 
             $scope = $dto->scope;
 
-            if ($this->userIsInfluencerHandler->handle($scope, $user)) {
+            if ($this->userIsInfluencer->handle($scope, $user)) {
                 return (new ErrorResource([
                     'message' => 'Access denied!',
                 ]))
@@ -57,7 +57,7 @@ class AuthService implements iAuthService
                     ->setStatusCode(Response::HTTP_FORBIDDEN);
             }
 
-            $token = $this->createTokenHandler->handle($user, $scope);
+            $token = $this->createToken->handle($user, $scope);
 
             return (new TokenResource([
                 'token' => $token,
@@ -79,7 +79,7 @@ class AuthService implements iAuthService
         /** @var User $user */
         $user = auth()->user();
 
-        $revoke = $this->revokeTokenHandler->handle($user);
+        $revoke = $this->revokeToken->handle($user);
 
         return response()->json(['result' => $revoke]);
     }
@@ -111,7 +111,7 @@ class AuthService implements iAuthService
      */
     public function updatePassword(Authenticatable|User $user, PasswordData|DataObject $getData): void
     {
-        $getData->password = $this->hashPasswordHandler->handle(Hash::make($getData->password));
+        $getData->password = $this->hashPassword->handle(Hash::make($getData->password));
 
         $this->userRepository->update($user, $getData);
     }

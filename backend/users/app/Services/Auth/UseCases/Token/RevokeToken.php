@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Services\Auth\Handlers\Token;
+namespace App\Services\Auth\UseCases\Token;
 
 use App\Models\User\User;
 
-class RevokeTokenHandler
+class RevokeToken
 {
 
     /**

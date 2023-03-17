@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Auth\Handlers;
+namespace App\Services\Auth\UseCases\Permissions;
 
 use App\Models\User\User;
 
