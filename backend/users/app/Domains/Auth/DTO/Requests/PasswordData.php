@@ -1,0 +1,14 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Domains\Auth\DTO\Requests;
+
+use Spatie\LaravelData\Data;
+
+class PasswordData extends Data
+{
+    public function __construct(
+        public string $password
+    ) {}
+}
