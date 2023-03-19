@@ -1,11 +1,11 @@
 <?php
 
-use App\Domains\Auth\Controllers\AuthController;
-use App\Domains\Auth\Controllers\LoginController;
-use App\Domains\Auth\Controllers\RegisterController;
-use App\Domains\Auth\Controllers\UpdatePasswordController;
-use App\Domains\Auth\Controllers\UserController;
-use App\Domains\Auth\Controllers\UserInfoController;
+use App\Modules\Auth\Controllers\AuthController;
+use App\Modules\Auth\Controllers\LoginController;
+use App\Modules\Auth\Controllers\RegisterController;
+use App\Modules\Auth\Controllers\UpdatePasswordController;
+use App\Modules\Auth\Controllers\UserController;
+use App\Modules\Auth\Controllers\UserInfoController;
 
 Route::post('login', [LoginController::class, 'login'])->name('login');
 Route::post('register', [RegisterController::class, 'register']);

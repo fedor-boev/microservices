@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-use App\Domains\User\Controller\UserController;
+use App\Modules\User\Controller\UserController;
 
 Route::group([
     'middleware' => 'auth:api',
