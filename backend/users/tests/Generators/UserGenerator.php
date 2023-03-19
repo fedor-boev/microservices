@@ -2,7 +2,7 @@
 
 //namespace Tests\Generators;
 //
-//use App\Domains\User\Models\User;
+//use App\Modules\User\Models\User;
 //use App\Enums\UserRole;
 //
 //class UserGenerator
