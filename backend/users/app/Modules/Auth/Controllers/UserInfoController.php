@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Modules\Auth\Controllers;
 
-use App\Modules\Auth\Contracts\iAuthService;
-use App\Modules\Auth\Requests\UpdateInfoRequest;
+use App\Common\Contracts\Auth\iAuthService;
+use App\Common\Controllers\Controller;
+use App\Modules\Auth\Requests\InfoRequest;
 use App\Modules\User\Models\User;
 use App\Modules\User\Resources\UserResource;
-use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Spatie\LaravelData\Exceptions\InvalidDataClass;
@@ -28,7 +28,7 @@ class UserInfoController extends Controller
      * @throws InvalidDataClass
      * @throws Throwable
      */
-    public function updateInfo(UpdateInfoRequest $request): JsonResponse
+    public function updateInfo(InfoRequest $request): JsonResponse
     {
         /** @var User $user */
         $user = Auth::user();

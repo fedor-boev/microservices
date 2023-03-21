@@ -4,9 +4,11 @@ declare(strict_types=1);
 
 namespace App\Modules\User\Controller;
 
-use App\Modules\Common\Resources\PaginatedResource;
-use App\Modules\User\Models\User;
-use App\Http\Controllers\Controller;
+use App\Common\Controllers\Controller;
+use App\Modules\User\Requests\IndexRequest;
+use App\Modules\User\Requests\StoreRequest;
+use App\Modules\User\Resources\UserResource;
+use App\Modules\User\Services\UserService;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -17,51 +19,53 @@ use Throwable;
 
 class UserController extends Controller
 {
-    /**
-     * Get users
-     *
-     * TODO: validate
-     *
-     * @param Request $request
-     * @return Collection|AnonymousResourceCollection
-     */
-    public function index(Request $request): Collection|AnonymousResourceCollection
+    public function __construct(
+        private readonly UserService $userService
+    )
     {
-        if ((int)$request->input('page') === -1) {
-            return User::all();
-        }
 
-        return PaginatedResource::collection(User::paginate());
     }
 
     /**
-     * TODO: resource
+     * Get users
      *
+     * @param IndexRequest $request
+     * @return Collection|AnonymousResourceCollection
+     */
+    public function index(IndexRequest $request): Collection|AnonymousResourceCollection
+    {
+        if ((int)$request->input('page') === -1) {
+            return $this->userService->getAll();
+        }
+
+        return UserResource::collection($this->userService->paginate());
+    }
+
+    /**
      * Show user
      *
      * @param int $id
-     * @return array
+     * @return JsonResponse
      */
-    public function show(int $id): array
+    public function show(int $id): JsonResponse
     {
-        return User::find($id)?->toArray ?? [];
+        return (new UserResource($this->userService->getById($id)))->response();
     }
 
     /**
      * Store user
-     * TODO: resource, validate
      *
-     * @param Request $request
+     * @param StoreRequest $request
      * @return JsonResponse
      */
-    public function store(Request $request): JsonResponse
+    public function store(StoreRequest $request): JsonResponse
     {
         $data = $request->only('first_name', 'last_name', 'email')
             + ['password' => Hash::make($request->input('password'))];
 
-        $user = User::create($data);
+        $user = $this->userService->create($data);
 
-        return response()->json($user, Response::HTTP_CREATED);
+        return (new UserResource($user))->response(Response::HTTP_CREATED);
     }
 
     /**
@@ -75,7 +79,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id): JsonResponse
     {
-        $user = User::find($id);
+        $user = $this->userService->getById($id);
 
         throw_if(!$user, 'RuntimeException', 'User not found');
 
@@ -92,6 +96,6 @@ class UserController extends Controller
      */
     public function destroy(int $id): bool
     {
-        return (bool) User::destroy($id);
+        return (bool) $this->userService->delete($id);
     }
 }

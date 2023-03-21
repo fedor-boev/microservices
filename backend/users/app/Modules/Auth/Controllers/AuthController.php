@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Modules\Auth\Controllers;
 
-use App\Http\Controllers\Controller;
+use App\Common\Controllers\Controller;
 
 class AuthController extends Controller
 {

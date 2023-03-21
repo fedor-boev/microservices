@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Modules\Auth\Repositories;
 
-use App\Modules\Auth\Contracts\iAuthRepository;
+use App\Common\Contracts\Auth\iAuthRepository;
 use App\Modules\Auth\DTO\Requests\RegisterData;
 use App\Modules\Auth\DTO\Requests\UserInfoData;
 use App\Modules\User\Models\User;
