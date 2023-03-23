@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Modules\Auth\Requests;
 
-use App\Modules\Auth\DTO\Requests\PasswordData;
+use App\Modules\Auth\DTO\PasswordData;
 use Illuminate\Foundation\Http\FormRequest;
 use Spatie\LaravelData\WithData;
 

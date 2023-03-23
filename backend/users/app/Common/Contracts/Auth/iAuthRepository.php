@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Common\Contracts\Auth;
 
+use App\Modules\Auth\DTO\RegisterData;
+use App\Modules\Auth\DTO\UserInfoData;
 use App\Modules\User\Models\User;
-use App\Modules\Auth\DTO\Requests\RegisterData;
-use App\Modules\Auth\DTO\Requests\UserInfoData;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\LaravelData\Contracts\DataObject;

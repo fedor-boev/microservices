@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace App\Modules\Auth\Repositories;
 
 use App\Common\Contracts\Auth\iAuthRepository;
-use App\Modules\Auth\DTO\Requests\RegisterData;
-use App\Modules\Auth\DTO\Requests\UserInfoData;
+use App\Modules\Auth\DTO\RegisterData;
+use App\Modules\Auth\DTO\UserInfoData;
 use App\Modules\User\Models\User;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
