@@ -10,7 +10,7 @@ use App\Models\Link\Link;
 
 class LinkController extends Controller
 {
-    public function show($code)
+    public function show($code): LinkResource
     {
         $link = Link::where('code', $code)->first();
 
