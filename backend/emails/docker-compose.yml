@@ -23,9 +23,9 @@ services:
             - emails
             - microservices
         depends_on:
-            - emails_db
+            - db
 
-    emails_db:
+    db:
         image: 'postgres:15'
         ports:
             - '${FORWARD_DB_PORT:-54327}:5432'

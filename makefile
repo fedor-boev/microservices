@@ -1,8 +1,8 @@
 app-install:
 	cd ./backend/admin/ && ./vendor/bin/sail artisan migrate --seed && ./vendor/bin/sail artisan passport:install
 
-# Step 1 Install composer
-dep-install:
+# Step 1 Install composer (dep-install)
+di:
 	cd ./backend/emails/ && npm i
 	cd ./backend/users/ && npm i
 	cd ./backend/checkout/ && npm i
@@ -14,8 +14,8 @@ dep-install:
 	cd ./backend/influencer/ && composer install
 	cd ./backend/admin/ && composer install
 
-# (optional) Containers update
-dep-update:
+# (optional) Containers update (sep-upgrade)
+du:
 	cd ./backend/emails/ && ./vendor/bin/sail composer update
 	cd ./backend/users/ && ./vendor/bin/sail composer update
 	cd ./backend/checkout/ && ./vendor/bin/sail composer update
@@ -26,7 +26,7 @@ dep-update:
 init:
 	docker network create microservices
 
-u:
+dcu:
 	docker network create microservices
 	cd ./backend/emails/ && ./vendor/bin/sail up -d
 	cd ./backend/users/ && ./vendor/bin/sail up -d
@@ -34,27 +34,27 @@ u:
 	cd ./backend/influencer/ && ./vendor/bin/sail up -d
 	cd ./backend/admin/ && ./vendor/bin/sail up -d
 
-d:
+dcd:
 	cd ./backend/emails/ && ./vendor/bin/sail down
 	cd ./backend/users/ && ./vendor/bin/sail down
 	cd ./backend/checkout/ && ./vendor/bin/sail down
 	cd ./backend/influencer/ && ./vendor/bin/sail down
 	cd ./backend/admin/ && ./vendor/bin/sail down
 	docker network rm microservices
-r:
+dcr:
 	cd ./backend/emails/ && ./vendor/bin/sail restart
 	cd ./backend/users/ && ./vendor/bin/sail restart
 	cd ./backend/checkout/ && ./vendor/bin/sail restart
 	cd ./backend/influencer/ && ./vendor/bin/sail restart
 	cd ./backend/admin/ && ./vendor/bin/sail restart
-b:
+dcb:
 	cd ./backend/emails/ && ./vendor/bin/sail build
 	cd ./backend/users/ && ./vendor/bin/sail build
 	cd ./backend/checkout/ && ./vendor/bin/sail build
 	cd ./backend/influencer/ && ./vendor/bin/sail build
 	cd ./backend/admin/ && ./vendor/bin/sail build
 
-t:
+dct:
 	cd ./backend/emails/ && ./vendor/bin/sail test
 	cd ./backend/users/ && ./vendor/bin/sail test
 	cd ./backend/checkout/ && ./vendor/bin/sail test

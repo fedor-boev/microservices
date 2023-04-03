@@ -23,9 +23,9 @@ services:
             - admin
             - microservices
         depends_on:
-            - admin_db
+            - db
 
-    admin_db:
+    db:
         image: 'postgres:15'
         ports:
             - '${FORWARD_DB_PORT:-54321}:5432'

@@ -23,9 +23,9 @@ services:
             - checkout
             - microservices
         depends_on:
-            - checkout_db
+            - db
 
-    checkout_db:
+    db:
         image: 'postgres:15'
         ports:
             - '${FORWARD_DB_PORT:-54329}:5432'
