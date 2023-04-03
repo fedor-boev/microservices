@@ -23,9 +23,9 @@ services:
             - influencer
             - microservices
         depends_on:
-            - influencer_db
+            - db
 
-    influencer_db:
+    db:
         image: 'postgres:15'
         ports:
             - '${FORWARD_DB_PORT:-54330}:5432'
