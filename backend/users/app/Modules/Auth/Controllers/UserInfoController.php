@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Modules\Auth\Controllers;
 
-use App\Common\Contracts\Auth\iAuthService;
 use App\Common\Controllers\Controller;
 use App\Modules\Auth\Requests\InfoRequest;
 use App\Modules\User\Models\User;
 use App\Modules\User\Resources\UserResource;
+use iAuthService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Spatie\LaravelData\Exceptions\InvalidDataClass;

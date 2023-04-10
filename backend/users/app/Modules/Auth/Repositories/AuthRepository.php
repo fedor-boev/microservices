@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 namespace App\Modules\Auth\Repositories;
 
-use App\Common\Contracts\Auth\iAuthRepository;
 use App\Modules\Auth\DTO\RegisterData;
 use App\Modules\Auth\DTO\UserInfoData;
 use App\Modules\User\Models\User;
+use iAuthRepository;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\LaravelData\Contracts\DataObject;

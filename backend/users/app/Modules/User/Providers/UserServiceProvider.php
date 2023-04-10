@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Modules\User\Providers;
 
-use App\Common\Contracts\User\iUserRepository;
-use App\Common\Contracts\User\iUserService;
 use App\Modules\User\Repositories\UserRepository;
 use App\Modules\User\Services\UserService;
 use Illuminate\Support\ServiceProvider;
+use User\iUserRepository;
+use User\iUserService;
 
 class UserServiceProvider extends ServiceProvider
 {

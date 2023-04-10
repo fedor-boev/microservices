@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-namespace App\Common\Contracts\Auth;
 
 use App\Modules\Auth\DTO\LoginData;
 use App\Modules\Auth\DTO\PasswordData;
@@ -12,7 +11,6 @@ use App\Modules\User\Models\User;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\JsonResponse;
 use Spatie\LaravelData\Contracts\DataObject;
-use Throwable;
 
 interface iAuthService
 {
