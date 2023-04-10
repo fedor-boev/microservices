@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Modules\Auth\Controllers;
 
-use App\Common\Contracts\User\iUserService;
 use App\Common\Controllers\Controller;
 use App\Modules\Auth\Requests\PasswordRequest;
 use App\Modules\User\Models\User;
@@ -12,6 +11,7 @@ use App\Modules\User\Resources\UserResource;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
+use User\iUserService;
 
 class UpdatePasswordController extends Controller
 {

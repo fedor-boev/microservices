@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-namespace App\Common\Contracts\Auth;
 
 use App\Modules\Auth\DTO\RegisterData;
 use App\Modules\Auth\DTO\UserInfoData;

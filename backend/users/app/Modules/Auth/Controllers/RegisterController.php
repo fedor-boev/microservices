@@ -2,9 +2,9 @@
 
 namespace App\Modules\Auth\Controllers;
 
-use App\Common\Contracts\Auth\iAuthService;
 use App\Common\Controllers\Controller;
 use App\Modules\Auth\Requests\RegisterRequest;
+use iAuthService;
 use Illuminate\Http\JsonResponse;
 use Spatie\LaravelData\Exceptions\InvalidDataClass;
 

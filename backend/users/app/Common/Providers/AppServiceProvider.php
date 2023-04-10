@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\Common\Providers;
 
-use App\Common\Contracts\Auth\iAuthRepository;
-use App\Common\Contracts\Auth\iAuthService;
-use App\Common\Contracts\User\iUserRepository;
-use App\Common\Contracts\User\iUserService;
 use App\Modules\Auth\Repositories\AuthRepository;
 use App\Modules\Auth\Services\AuthService;
 use App\Modules\User\Repositories\UserRepository;
 use App\Modules\User\Services\UserService;
+use iAuthRepository;
+use iAuthService;
 use Illuminate\Support\ServiceProvider;
+use User\iUserRepository;
+use User\iUserService;
 
 class AppServiceProvider extends ServiceProvider
 {

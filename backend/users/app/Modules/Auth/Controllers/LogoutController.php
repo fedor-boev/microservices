@@ -2,8 +2,8 @@
 
 namespace App\Modules\Auth\Controllers;
 
-use App\Common\Contracts\Auth\iAuthService;
 use App\Common\Controllers\Controller;
+use iAuthService;
 use Illuminate\Http\JsonResponse;
 
 class LogoutController extends Controller

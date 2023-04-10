@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Modules\User\Repositories;
 
-use App\Common\Contracts\User\iUserRepository;
 use App\Modules\User\Models\User;
+use User\iUserRepository;
 
 class UserRepository implements iUserRepository
 {

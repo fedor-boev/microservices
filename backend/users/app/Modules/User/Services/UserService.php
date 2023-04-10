@@ -2,8 +2,8 @@
 
 namespace App\Modules\User\Services;
 
-use App\Common\Contracts\User\iUserService;
 use App\Modules\User\Repositories\UserRepository;
+use User\iUserService;
 
 class UserService implements iUserService
 {
