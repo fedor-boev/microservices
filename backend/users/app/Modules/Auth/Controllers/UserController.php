@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Modules\Auth\Controllers;
 
-use App\Common\Controllers\Controller;
 use App\Modules\User\Resources\UserResource;
+use Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Auth;
 use Throwable;

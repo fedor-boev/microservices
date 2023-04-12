@@ -2,7 +2,7 @@
 
 namespace App\Modules\Auth\Controllers;
 
-use App\Common\Controllers\Controller;
+use Controller;
 use iAuthService;
 use Illuminate\Http\JsonResponse;
 
