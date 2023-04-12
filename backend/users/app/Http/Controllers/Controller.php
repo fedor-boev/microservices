@@ -1,6 +1,5 @@
 <?php
 
-namespace App\Common\Controllers;
 
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Validation\ValidatesRequests;

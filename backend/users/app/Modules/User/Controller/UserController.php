@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace App\Modules\User\Controller;
 
-use App\Common\Controllers\Controller;
 use App\Modules\User\Requests\IndexRequest;
 use App\Modules\User\Requests\StoreRequest;
 use App\Modules\User\Resources\UserResource;
 use App\Modules\User\Services\UserService;
+use Controller;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
