@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Common\Providers;
+namespace App\Providers;
 
 use App\Modules\Auth\Repositories\AuthRepository;
 use App\Modules\Auth\Services\AuthService;
