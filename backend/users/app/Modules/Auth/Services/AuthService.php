@@ -2,7 +2,6 @@
 
 namespace App\Modules\Auth\Services;
 
-use App\Common\Resources\ErrorResource;
 use App\Modules\Auth\DTO\LoginData;
 use App\Modules\Auth\DTO\PasswordData;
 use App\Modules\Auth\DTO\RegisterData;
@@ -14,6 +13,7 @@ use App\Modules\Auth\Services\UseCases\Token\CreateToken;
 use App\Modules\Auth\Services\UseCases\Token\RevokeToken;
 use App\Modules\User\Models\User;
 use App\Modules\User\Resources\UserResource;
+use ErrorResource;
 use iAuthRepository;
 use iAuthService;
 use Illuminate\Contracts\Auth\Authenticatable;
