@@ -12,7 +12,7 @@ class UserResource extends JsonResource
     /**
      * Transform the resource into an array.
      */
-    public function toArray(\Illuminate\Http\Request $request)
+    public function toArray(\Illuminate\Http\Request $request): array
     {
         return [
             'id' => $this->id,
