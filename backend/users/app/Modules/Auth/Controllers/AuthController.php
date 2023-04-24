@@ -9,7 +9,7 @@ use Controller;
 class AuthController extends Controller
 {
     /**
-     * Check AUTH user is authenticated
+     * User is authenticated
      *
      * @return int
      */
