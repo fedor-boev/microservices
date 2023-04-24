@@ -11,6 +11,8 @@
         "laravel/framework": "^10.0",
         "laravel/octane": "^1.4",
         "laravel/tinker": "^2.8",
+        "spatie/laravel-data": "^3.4",
+        "spatie/laravel-typescript-transformer": "^2.3",
         "spiral/roadrunner": "^2.12",
         "vladimir-yuldashev/laravel-queue-rabbitmq": "^13.2"
     },
