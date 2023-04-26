@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace User;
+namespace App\Application\Contracts;
 
 interface iUserService
 {
