@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
+namespace App\Application\Contracts;
 
-use App\Modules\Auth\DTO\RegisterData;
-use App\Modules\Auth\DTO\UserInfoData;
-use App\Modules\User\Models\User;
+use App\Application\DTOs\Auth\RegisterData;
+use App\Application\DTOs\Auth\UserInfoData;
+use App\Models\User;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\LaravelData\Contracts\DataObject;
