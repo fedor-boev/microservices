@@ -2,12 +2,13 @@
 
 declare(strict_types=1);
 
+namespace App\Application\Contracts;
 
-use App\Modules\Auth\DTO\LoginData;
-use App\Modules\Auth\DTO\PasswordData;
-use App\Modules\Auth\DTO\RegisterData;
-use App\Modules\Auth\DTO\UserInfoData;
-use App\Modules\User\Models\User;
+use App\Application\DTOs\Auth\LoginData;
+use App\Application\DTOs\Auth\PasswordData;
+use App\Application\DTOs\Auth\RegisterData;
+use App\Application\DTOs\Auth\UserInfoData;
+use App\Models\User;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Http\JsonResponse;
 use Spatie\LaravelData\Contracts\DataObject;
@@ -21,7 +22,6 @@ interface iAuthService
      *
      * @param LoginData|DataObject $dto
      * @return JsonResponse
-     * @throws Throwable
      */
     public function createToken(LoginData|DataObject $dto): JsonResponse;
 

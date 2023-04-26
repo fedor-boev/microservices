@@ -1,7 +1,10 @@
 <?php
 
+declare(strict_types=1);
 
-use App\Common\Providers\RouteServiceProvider;
+namespace App\Http\Middleware;
+
+use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
