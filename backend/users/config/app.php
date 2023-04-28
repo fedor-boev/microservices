@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 use Illuminate\Support\Facades\Facade;
 
 return [
@@ -194,12 +196,7 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         \App\Providers\EventServiceProvider::class,
         \App\Providers\RouteServiceProvider::class,
-
-        /*
-         * Application Modules Service Providers...
-         */
-        \App\Modules\Auth\Providers\AuthServiceProvider::class,
-        \App\Modules\User\Providers\UserServiceProvider::class,
+        \App\Providers\UserServiceProvider::class,
     ],
 
     /*
