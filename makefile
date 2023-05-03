@@ -26,7 +26,7 @@ du:
 init:
 	docker network create microservices
 
-dcu:
+dcud:
 	docker network create microservices
 	cd ./backend/emails/ && ./vendor/bin/sail up -d
 	cd ./backend/users/ && ./vendor/bin/sail up -d
