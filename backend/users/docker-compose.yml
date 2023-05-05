@@ -1,6 +1,6 @@
 version: '3.9'
 services:
-    users:
+    php:
         build:
             context: ./docker/8.2
             dockerfile: Dockerfile
