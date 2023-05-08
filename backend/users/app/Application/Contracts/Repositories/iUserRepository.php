@@ -4,25 +4,25 @@ declare(strict_types=1);
 
 namespace App\Application\Contracts\Repositories;
 
-use App\Models\User;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
-use Illuminate\Database\Eloquent\Collection;
+use App\Application\DTOs\User\CreateUserDataRequest;
+use App\Application\DTOs\User\UpdateUserDataRequest;
+use App\Domain\Entities\User;
 
 interface iUserRepository
 {
     /**
      * Get collection of users
      *
-     * @return Collection
+     * @return array
      */
-    public function getAll(): \Illuminate\Database\Eloquent\Collection;
+    public function getAll(): array;
 
     /**
      * Get paginate by users
      *
-     * @return LengthAwarePaginator
+     * @return array
      */
-    public function paginate(): \Illuminate\Contracts\Pagination\LengthAwarePaginator;
+    public function paginate(): array;
 
     /**
      * Get user by id
@@ -33,21 +33,29 @@ interface iUserRepository
     public function getById(int $id): ?User;
 
     /**
+     * Get user by email
+     *
+     * @param string $email
+     * @return User|null
+     */
+    public function getByEmail(string $email): ?User;
+
+    /**
      * Create user
      *
-     * @param array $attributes
+     * @param CreateUserDataRequest $user
      * @return User
      */
-    public function create(array $attributes): User;
+    public function create(CreateUserDataRequest $user): User;
 
     /**
      * Update user
      *
      * @param int $id
-     * @param array $attributes
+     * @param UpdateUserDataRequest $user
      * @return bool
      */
-    public function update(int $id, array $attributes): bool;
+    public function update(int $id, UpdateUserDataRequest $user): bool;
 
     /**
      * Delete user
