@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-namespace App\Modules\Auth\Requests;
 
 use App\Modules\Auth\DTO\LoginData;
 use Illuminate\Foundation\Http\FormRequest;

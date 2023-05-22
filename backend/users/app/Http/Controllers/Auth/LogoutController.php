@@ -1,6 +1,6 @@
 <?php /** @noinspection PhpMultipleClassDeclarationsInspection */
 
-namespace App\Modules\Auth\Controllers;
+namespace App\Http\Controllers\Auth;
 
 use Controller;
 use iAuthService;

@@ -2,13 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Modules\Auth\Requests;
 
-use App\Modules\Auth\DTO\UserInfoData;
+use App\Modules\Auth\DTO\PasswordData;
 use Illuminate\Foundation\Http\FormRequest;
 use Spatie\LaravelData\WithData;
 
-class InfoRequest extends FormRequest
+class PasswordRequest extends FormRequest
 {
     use WithData;
 
@@ -26,12 +25,13 @@ class InfoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'email',
+            'password' => 'required|string',
+            'password_confirm' => 'required|same:password|string',
         ];
     }
 
     protected function dataClass(): string
     {
-        return UserInfoData::class;
+        return PasswordData::class;
     }
 }

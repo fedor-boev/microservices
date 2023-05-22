@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Modules\Auth\Controllers;
+namespace App\Http\Controllers\Auth;
 
-use App\Modules\Auth\Requests\LoginRequest;
+use App\Application\Contracts\Services\iAuthService;
 use Controller;
-use iAuthService;
 use Illuminate\Http\JsonResponse;
+use LoginRequest;
 use Spatie\LaravelData\Exceptions\InvalidDataClass;
 use Throwable;
 
