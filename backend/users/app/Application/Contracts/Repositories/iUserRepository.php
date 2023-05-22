@@ -6,23 +6,23 @@ namespace App\Application\Contracts\Repositories;
 
 use App\Application\DTOs\User\CreateUserDataRequest;
 use App\Application\DTOs\User\UpdateUserDataRequest;
-use App\Domain\Entities\User;
+use App\Models\User;
 
 interface iUserRepository
 {
     /**
      * Get collection of users
      *
-     * @return array
+     * @return mixed
      */
-    public function getAll(): array;
+    public function getAll(): mixed;
 
     /**
      * Get paginate by users
      *
-     * @return array
+     * @return mixed
      */
-    public function paginate(): array;
+    public function paginate(): mixed;
 
     /**
      * Get user by id

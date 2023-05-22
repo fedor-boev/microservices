@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Common\Exceptions;
+namespace App\Exceptions;
 
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Routing\ResponseFactory;
