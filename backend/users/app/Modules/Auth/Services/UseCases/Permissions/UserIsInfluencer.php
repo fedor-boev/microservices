@@ -2,7 +2,7 @@
 
 namespace App\Modules\Auth\Services\UseCases\Permissions;
 
-use App\Modules\User\Models\User;
+use App\Models\User;
 
 class UserIsInfluencer
 {
