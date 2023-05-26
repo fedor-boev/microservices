@@ -6,7 +6,7 @@ namespace App\Application\Contracts\Services;
 
 use App\Application\DTOs\User\CreateUserDataRequest;
 use App\Application\DTOs\User\UpdateUserDataRequest;
-use App\Domain\Entities\User;
+use App\Models\User;
 
 interface iUserService
 {
