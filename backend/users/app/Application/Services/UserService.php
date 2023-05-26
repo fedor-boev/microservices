@@ -6,7 +6,7 @@ use App\Application\Contracts\Repositories\iUserRepository;
 use App\Application\Contracts\Services\iUserService;
 use App\Application\DTOs\User\CreateUserDataRequest;
 use App\Application\DTOs\User\UpdateUserDataRequest;
-use App\Domain\Entities\User;
+use App\Models\User;
 
 class UserService implements iUserService
 {
