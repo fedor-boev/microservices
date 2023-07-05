@@ -12,7 +12,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+         $schedule->command('inspire')->hourly();
 
         // очистка кэша для laravel 10
         // $schedule->command('cache:prune-stale-tags')->hourly();
